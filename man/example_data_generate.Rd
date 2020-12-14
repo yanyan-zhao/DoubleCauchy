@@ -2,7 +2,7 @@
 % Please edit documentation in R/example_data_generate.R
 \name{example_data_generate}
 \alias{example_data_generate}
-\title{A function to simulate data for example}
+\title{A function to simulate data for an example}
 \usage{
 example_data_generate(n, J, beta)
 }
@@ -27,5 +27,4 @@ This function returns a list contains the simulated outcome variable Y and genot
  beta=c(rep(2,3),rep(0,J-3))
  data=example_data_generate(n, J, beta)
 }
-
 }

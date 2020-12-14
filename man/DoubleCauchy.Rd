@@ -49,9 +49,9 @@ See \code{pdsoft} and \code{pdsoft.cv} in \code{PDSCE} for details.}
 A vector of p values.
 }
 \description{
-The function returns the p values of a stable and adaptive test based on repeated sample splitting.
-It is applicable both for n is larger than J, and J is much larger than n.
-Repeated sample splitting is applied to remedy the randomness of the sample splitting.
+The function returns the p values of a stable and adaptive test
+for simultaneously testing regression coefficients of
+generalized linear models of high dimensional data.
 }
 \examples{
  J = 100

@@ -2,7 +2,7 @@
 % Please edit documentation in R/AdapSide.R
 \name{AdapSide}
 \alias{AdapSide}
-\title{An adaptive test when side information is available}
+\title{An adaptive test leveraging side information}
 \usage{
 AdapSide(
   Y,
@@ -34,7 +34,6 @@ A vector of p values.
 }
 \description{
 The function returns the p values of an adaptive test by leveraging available side information.
-It is applicable both when n is larger than J, and J is much larger than n.
 }
 \examples{
  J = 100

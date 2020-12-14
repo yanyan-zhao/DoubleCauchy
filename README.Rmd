@@ -75,5 +75,4 @@ Example 2: A stable and adaptive test based on repeated sample splitting
 ## Reference
 
 Zhao and Sun (2020). A stable and adaptive polygenic signal detection method based on repeated sample splitting.
- \emph{arXiv:2008.02442}.
 

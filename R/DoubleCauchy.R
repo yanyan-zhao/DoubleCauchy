@@ -1,10 +1,8 @@
 #' A stable and adaptive polygenic signal detection based on repeated sample splitting.
 #'
-#' The function returns the p values of a stable and adaptive test for
-#' simultaneously testing regression coefficients
-#' of generalized linear models of high dimensional data.
-#'
-#'
+#' The function returns the p values of a stable and adaptive test
+#' for simultaneously testing regression coefficients of
+#' generalized linear models of high dimensional data.
 #'
 #' @param n1 number of individuals for training.
 #' @param m number of sample splitting.
