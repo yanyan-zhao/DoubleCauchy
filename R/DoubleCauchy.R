@@ -11,7 +11,7 @@
 #' @param varselec.method variable selection methods for training sample.
 #' @param J2 number of variables selected based on training sample. Only needed when \code{DCSIS} is selected.
 #' @param alpha The elasticnet mixing parameter, with \eqn{0\le\alpha\le 1}.
-#'              \code{alpha=1} is the lasso penalty, and \code{alpha=0} the ridge penalty. Only needed when \code{glmnet} is selected.
+#'              \code{alpha=1} is the lasso penalty, and \code{alpha=0} the ridge penalty. Only needed when \code{ElasticNet} is selected.
 #' @param cor.est The method for estimating a positive definite correlation matrix.
 #' @param lam The tuning parameter for estimating correlation matrix; Could be either a scalar or
 #'            a p by p symmetric matrix with an irrelevant diagonal while \code{pdsoft} is selected;

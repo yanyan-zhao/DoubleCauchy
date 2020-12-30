@@ -32,7 +32,7 @@ DoubleCauchy(
 \item{J2}{number of variables selected based on training sample. Only needed when \code{DCSIS} is selected.}
 
 \item{alpha}{The elasticnet mixing parameter, with \eqn{0\le\alpha\le 1}.
-\code{alpha=1} is the lasso penalty, and \code{alpha=0} the ridge penalty. Only needed when \code{glmnet} is selected.}
+\code{alpha=1} is the lasso penalty, and \code{alpha=0} the ridge penalty. Only needed when \code{ElasticNet} is selected.}
 
 \item{cor.est}{The method for estimating a positive definite correlation matrix.}
 
