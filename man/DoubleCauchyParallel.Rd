@@ -55,7 +55,9 @@ See \code{pdsoft} and \code{pdsoft.cv} in \code{PDSCE} for details.}
 A vector of p values.
 }
 \description{
-This function is a parallel version of DoubleCauchy function, which can parallel the sample splitting times to improve computational efficiency.
+This function is a parallel version of DoubleCauchy function,
+which can parallel the sample splitting times to improve
+computational efficiency.
 }
 \examples{
  J = 100
@@ -69,8 +71,8 @@ This function is a parallel version of DoubleCauchy function, which can parallel
  pow.param=c(1:5)
  n1=20
  m=10
- DoubleCauchy(n1, m, Y, G, varselec.method="DCSIS", J2=10,
- cor.est="pdsoft", lam=lam, pow.param=pow.param)
+ DoubleCauchyParallel(n1=25, m=10, Y=Y, G=G, varselec.method="SIS", J2=25,
+ cor.est="pdsoft", lam=lam, pow.param=pow.param, family="binomial", ncores=2)
 
 
 }

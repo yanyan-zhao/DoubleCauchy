@@ -1,6 +1,8 @@
 #' A stable and adaptive polygenic signal detection based on repeated sample splitting.
 #'
-#' This function is a parallel version of DoubleCauchy function, which can parallel the sample splitting times to improve computational efficiency.
+#' This function is a parallel version of DoubleCauchy function,
+#' which can parallel the sample splitting times to improve
+#' computational efficiency.
 #'
 #' @param n1 number of individuals for training.
 #' @param m number of sample splitting.
@@ -46,8 +48,8 @@
 #'  pow.param=c(1:5)
 #'  n1=20
 #'  m=10
-#'  DoubleCauchy(n1, m, Y, G, varselec.method="DCSIS", J2=10,
-#'  cor.est="pdsoft", lam=lam, pow.param=pow.param)
+#'  DoubleCauchyParallel(n1=25, m=10, Y=Y, G=G, varselec.method="SIS", J2=25,
+#'  cor.est="pdsoft", lam=lam, pow.param=pow.param, family="binomial", ncores=2)
 #'
 #'
 #' @keywords Parallel, Stable and adaptive test, Sample splitting, Double Cauchy

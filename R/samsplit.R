@@ -85,6 +85,6 @@ samsplit=function(Y, G, ind_random, varselec.method=c("DCSIS","ElasticNet","SIS"
     return(results)
 
   }else{
-    stop("No variables are selected")
+    stop("No variables are selected.")
   }
 }
