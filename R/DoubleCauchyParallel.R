@@ -1,8 +1,6 @@
 #' A stable and adaptive polygenic signal detection based on repeated sample splitting.
 #'
-#' The function returns the p values of a stable and adaptive test
-#' for simultaneously testing regression coefficients of
-#' generalized linear models of high dimensional data.
+#' This function is a parallel version of DoubleCauchy function, which can parallel the sample splitting times to improve computational efficiency.
 #'
 #' @param n1 number of individuals for training.
 #' @param m number of sample splitting.
@@ -20,6 +18,7 @@
 #' @param pow.param an integer numeric vector specifying the \eqn{\gamma} values used in the test statistics.
 #' @param seed seeds for sample splitting, should be a scalar.
 #' @param family Specify response type. Only needed when \code{SIS} is selected and only "gaussian" and "binomial" are available.
+#' @param ncores Number of cores to be used in parallel computing (default=1).
 #'
 #' @return A vector of p values.
 #'
@@ -31,6 +30,9 @@
 #' @importFrom VariableScreening screenIID
 #' @import stats
 #' @importFrom SIS SIS
+#' @importFrom doParallel registerDoParallel stopImplicitCluster
+#' @importFrom foreach foreach %dopar%
+#'
 #'
 #' @examples
 #'  J = 100
@@ -48,16 +50,16 @@
 #'  cor.est="pdsoft", lam=lam, pow.param=pow.param)
 #'
 #'
-#' @keywords Stable and adaptive test, Sample splitting, Double Cauchy
+#' @keywords Parallel, Stable and adaptive test, Sample splitting, Double Cauchy
 #'
 #' @references Zhao and Sun (2020). A stable and adaptive polygenic signal detection method based on repeated sample splitting.
 #'    \emph{arXiv:2008.02442}.
 #'
 #' @export
 #'
-DoubleCauchy<-function(n1, m, Y, G, varselec.method=c("DCSIS","ElasticNet","SIS"),
+DoubleCauchyParallel<-function(n1, m, Y, G, varselec.method=c("DCSIS","ElasticNet","SIS"),
                        J2=NULL, alpha=NULL, cor.est=c("pdsoft","pdsoft.cv"),
-                       lam, pow.param=c(0:10), seed=NULL,family=c("gaussian","binomial")){
+                       lam, pow.param=c(0:10), seed=NULL,family=c("gaussian","binomial"), ncores=1){
 
   n=dim(G)[1]
   J=dim(G)[2]
@@ -69,20 +71,31 @@ DoubleCauchy<-function(n1, m, Y, G, varselec.method=c("DCSIS","ElasticNet","SIS"
   family <- match.arg(family)
 
   pfinal=NULL
+  i=NULL
   if(is.null(seed)){
-    for(i in 1:m){
+    ##################################
+    #  parallel
+    ##################################
+    registerDoParallel(ncores)
+    pfinal<-foreach(i=1:m, .combine=rbind, .errorhandling='pass')%dopar%{
       set.seed(i)
       ind_random=as.logical(sample(index))
-      pfinal0=samsplit(Y=Y, G=G, ind_random=ind_random, varselec.method=varselec.method, J2=J2, alpha=alpha, cor.est=cor.est, lam=lam, pow.param=pow.param,family=family)
-      pfinal=rbind(pfinal,pfinal0)
+      samsplit(Y=Y, G=G, ind_random=ind_random, varselec.method=varselec.method, J2=J2, alpha=alpha, cor.est=cor.est, lam=lam, pow.param=pow.param,family=family)
     }
+   stopImplicitCluster()
+
   }else{
-    for(i in 1:m){
+    ##################################
+    #  parallel
+    ##################################
+    registerDoParallel(ncores)
+    pfinal<-foreach(i=1:m, .combine=rbind, .errorhandling='pass')%dopar%{
       set.seed(i*seed)
       ind_random=as.logical(sample(index))
-      pfinal0=samsplit(Y=Y, G=G, ind_random=ind_random, varselec.method=varselec.method, J2=J2, alpha=alpha, cor.est=cor.est, lam=lam, pow.param=pow.param,family=family)
-      pfinal=rbind(pfinal,pfinal0)
+      samsplit(Y=Y, G=G, ind_random=ind_random, varselec.method=varselec.method, J2=J2, alpha=alpha, cor.est=cor.est, lam=lam, pow.param=pow.param,family=family)
     }
+    stopImplicitCluster()
+
   }
 
   cauchyfun<-function(x){

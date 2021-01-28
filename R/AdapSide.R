@@ -20,6 +20,7 @@
 #' @importFrom PDSCE pdsoft pdsoft.cv
 #' @importFrom VariableScreening screenIID
 #' @import stats
+#' @importFrom SIS SIS
 #'
 #' @examples
 #'  J = 100

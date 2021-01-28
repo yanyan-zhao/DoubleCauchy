@@ -16,4 +16,7 @@ Imports:
     VariableScreening,
     glmnet,
     matrixcalc,
-    stats
+    stats,
+    SIS,
+    doParallel,
+    foreach

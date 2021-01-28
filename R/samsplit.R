@@ -1,10 +1,11 @@
-samsplit=function(Y, G, ind_random, varselec.method=c("DCSIS","ElasticNet"),
+samsplit=function(Y, G, ind_random, varselec.method=c("DCSIS","ElasticNet","SIS"),
                   J2=NULL, alpha=NULL, cor.est=c("pdsoft","pdsoft.cv"),
-                  lam, pow.param=c(0:10)){
+                  lam, pow.param=c(0:10),family=c("gaussian","binomial")){
 
   varmeth <- match.arg(varselec.method)
   cor.est <- match.arg(cor.est)
   pow.param <- pow.param
+  family <- match.arg(family)
 
   if (!is.vector(Y)) {
     stop("Y should be a numeric vector")
@@ -21,7 +22,19 @@ samsplit=function(Y, G, ind_random, varselec.method=c("DCSIS","ElasticNet"),
   y.test=scale(Y[ind_random_2])
   G.test=scale(G[ind_random_2,])
 
-  if(varmeth == "DCSIS"){
+  if(varmeth == "SIS"){
+
+    if (is.null(J2)) {
+      stop("Please specify J2 to be used for variable selection in SIS")
+    }
+
+    Sresult = SIS(x = G.train, y = y.train, family=family, nsis=J2, iter=F, penalty="lasso")
+    G.train.selec=G.train[,Sresult$sis.ix0]
+    G.test.selec=G.test[,Sresult$sis.ix0]
+
+    num.var=dim(G.test.selec)[2]
+
+  }else if(varmeth == "DCSIS"){
 
     if (is.null(J2)) {
       stop("Please specify J2 to be used for variable selection in DCSIS")
