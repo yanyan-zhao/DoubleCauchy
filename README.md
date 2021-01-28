@@ -42,7 +42,7 @@ Example 1: “AdapSide” function to leverage side information.
  pow.param=c(1:5)
  AdapSide(Y, G, cor.est="pdsoft", lam, weights, pow.param)
 #>          p.1          p.2          p.3          p.4          p.5     p.cauchy 
-#> 2.307494e-05 4.258979e-06 0.000000e+00 0.000000e+00 0.000000e+00 0.000000e+00
+#> 2.096951e-04 4.808596e-05 1.334857e-05 1.007032e-05 2.226672e-07 1.065919e-06
 ```
 
 Example 2: A stable and adaptive test based on repeated sample splitting
@@ -61,10 +61,10 @@ Example 2: A stable and adaptive test based on repeated sample splitting
  m=10
  DoubleCauchy(n1, m, Y, G, varselec.method="DCSIS", J2=10, cor.est="pdsoft", lam=lam, pow.param=pow.param)
 #>          p.1          p.2          p.3          p.4          p.5     p.cauchy 
-#> 0.0002502065 0.0003357037 0.0002061647 0.0002812938 0.0002181640 0.0002504418
+#> 1.593165e-05 1.030144e-04 3.584657e-05 1.134259e-04 7.138612e-05 4.058546e-05
 ```
 
 ## Reference
 
 Zhao and Sun (2020). A stable and adaptive polygenic signal detection
-method based on repeated sample splitting.
+method based on repeated sample splitting.Submitted.
