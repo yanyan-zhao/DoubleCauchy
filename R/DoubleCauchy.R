@@ -78,7 +78,7 @@ DoubleCauchy<-function(n1, m, Y, G, varselec.method=c("DCSIS","ElasticNet","SIS"
     }
   }else{
     for(i in 1:m){
-      set.seed(i*seed)
+      set.seed((seed-1)*m+i)
       ind_random=as.logical(sample(index))
       pfinal0=samsplit(Y=Y, G=G, ind_random=ind_random, varselec.method=varselec.method, J2=J2, alpha=alpha, cor.est=cor.est, lam=lam, pow.param=pow.param,family=family)
       pfinal=rbind(pfinal,pfinal0)
